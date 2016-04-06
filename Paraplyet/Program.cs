@@ -10,6 +10,8 @@ namespace Paraplyet
     {
         static void Main(string[] args)
         {
+            Console.WriteLine("Om jag ser detta funkar det");
+            Console.ReadLine();
         }
     }
 }
