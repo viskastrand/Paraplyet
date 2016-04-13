@@ -52,8 +52,9 @@ namespace Paraplyet
                     break;
                 else if (input == "leta efter paraply" || input == "paraply")
                 {
-                    Console.WriteLine("Du hittade paraplyet!");
+                    Console.WriteLine("Du hittade paraplyet och du kan nu gå ut utan att bli blöt.");
                     gamecomplete = true;
+                    paraply = true;
                     break;
                 }
 
