@@ -25,7 +25,7 @@ namespace Paraplyet
                 sovrummet();
                 if (gameover)
                     Console.WriteLine("\nDu förlorade!!! Vill du spela igen? y/n");
-                else
+                else 
                     Console.WriteLine("\nDu vann!!! Vill du spela igen? y/n");
                 input = Console.ReadLine();
                 if (input == "n" || input == "no" || input == "nej")
@@ -42,7 +42,7 @@ namespace Paraplyet
         {
             while (true)
             {
-                Console.WriteLine("\nDu är i sovrummet. Hallen är rakt framför dig");
+                Console.WriteLine("\nDu är i sovrummet. Hallen är framför dig");
                 Console.Write("\n>");
                 input = Console.ReadLine();
 
@@ -52,6 +52,9 @@ namespace Paraplyet
                     Console.WriteLine("Du hittar ingenting.");
                 else if (input == "kolla omkring" || input == "titta")
                     Console.WriteLine("Du ser en säng och en dörr till hallen");
+                else if (input == "gå ut" || input == "gå utomhus" || input == "utomhus")
+                    Console.WriteLine("Du måste gå till hallen för att gå ut");
+
                 else if (input == "tips" || input == "hjälp")
                     Console.WriteLine("kanske finns i hallen?");
                 else
@@ -67,33 +70,57 @@ namespace Paraplyet
                 Console.Write("\n>");
                 input = Console.ReadLine();
 
-                if (input == "utomhus" || input == "gå ut")
+                if (input == "utomhus" || input == "gå ut" || input == "gå utomhus")
                 {
                     if (paraply)
                     {
                         Console.WriteLine("Du går ut och kollar runtomkring");
-                            break;
-                            }
-                    else
-                        Console.WriteLine("Du kommer dö om du går ut");
+                        break;
                     }
+                    else
+                    {
+                        Console.WriteLine("Du kommer dö om du går ut. Är du säker på att du vill? y/n");
+                       
+                        while (true)
+                        {
+                            input = Console.ReadLine();
+                            if (input == "y" || input == "yes" || input == "ja")
+                            {
+                                Console.WriteLine("Du dog!!");
+                                gameover = true;
+                                goto sluthallen;
+                            }
+                            else if (input == "n" || input == "no" || input == "nej")                            
+                                break;                           
+                            else
+                                Console.WriteLine("Icke gilltigt eller felstavat commando!");
+                        }
+                    }
+                }
                 else if (input == "leta efter paraply" || input == "paraply")
                 {
-                    Console.WriteLine("Du hittade paraplyet och du kan nu gå ut utan att bli blöt.");
-                    paraply = true;
+                    if (paraply)
+                        Console.WriteLine("Du har redan hittat paraplyet");
+                    else
+                    {
+                        Console.WriteLine("Du hittade paraplyet och du kan nu gå ut utan att bli blöt.");
+                        paraply = true;
+                    }
+                    
                 }
 
 
                 else if (input == "kolla omkring" || input == "titta" || input == "titta omkring")
-                    Console.WriteLine("Du ser en bänk, garderob, hatthylla och en dörr.");
+                    Console.WriteLine("Du ser en bänk, garderob, hatthylla men ingen dörr mystiskt nog.");
                 else if (input == "tips" || input == "hjälp")
-                    Console.WriteLine("kanske finns i hallen?");
+                    Console.WriteLine("Ganska säker att paraplyet finns här!");
                 else
                     Console.WriteLine("Icke gilltigt eller felstavat commando!");
-            }
-            utomhus();
-        }
-              
+                    }
+                    utomhus();
+                    sluthallen: { }
+                }
+
         private static void utomhus()
         {
             while (true)
@@ -118,14 +145,11 @@ namespace Paraplyet
                 else if (input == "höger")
                 {
                     Console.WriteLine("Du går till höger och ser jobbet framför dig. Du har kommit till jobbet, Grattis!");
-                    break;
                     gamecomplete = true;
+                    break;
                 }
                 else
                     Console.WriteLine("Icke gilltigt eller felstavat commando!");
-                {
-                   
-                }
             }
             if (gamecomplete)
                 { }
